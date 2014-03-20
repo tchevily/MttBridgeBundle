@@ -1,0 +1,21 @@
+{
+    "name": "canaltp/mtt-business-app",
+    "type": "symfony-bundle",
+    "description": "Mtt business app bundle",
+    "keywords": [],
+    "homepage": "http://hg.prod.canaltp.fr/ctp/SymfonyBundles/CanalTPMttBusinessAppBundle.git",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Akambi Fagbohoun",
+            "email": "akambi.fagbohoun@canaltp.fr"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2"
+    },
+    "autoload": {
+        "psr-0": { "CanalTP\\MttBusinessAppBundle\\": "" }
+    },
+    "target-dir": "CanalTP/MttBusinessAppBundle/"
+}
