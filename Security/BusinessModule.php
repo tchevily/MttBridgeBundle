@@ -2,7 +2,6 @@
 
 namespace CanalTP\MttBusinessAppBundle\Security;
 
-use Symfony\Component\DependencyInjection\Container;
 use CanalTP\Sam\Ecore\ApplicationManagerBundle\Security\AbstractBusinessModule;
 
 class BusinessModule extends AbstractBusinessModule
@@ -12,10 +11,11 @@ class BusinessModule extends AbstractBusinessModule
         $this->permissions = $permissions;
     }
 
-    public function getId() {
+    public function getId()
+    {
         return 1;
     }
-    
+
     public function getName()
     {
         return 'test';

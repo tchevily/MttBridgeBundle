@@ -12,14 +12,14 @@ use CanalTP\Sam\Ecore\ApplicationManagerBundle\Security\BusinessComponentInterfa
 class BusinessComponent implements BusinessComponentInterface
 {
     private $businessPermissionManager;
-    
+
     public function __construct($businessPermissionManager)
     {
         $this->businessPermissionManager = $businessPermissionManager;
-         //$this->businessPermissionManager = new BusinessCom
     }
-    
-    public function getId() {
+
+    public function getId()
+    {
         return 'mtt_business_component';
     }
 
@@ -27,21 +27,21 @@ class BusinessComponent implements BusinessComponentInterface
     {
         return 'Business component MTT';
     }
-    
-    public function hasPerimeters() {
+
+    public function hasPerimeters()
+    {
     }
-    
-    public function getMenuItems() {
-        
+
+    public function getMenuItems()
+    {
     }
-    
-    public function getPerimetersManager() {
-        
+
+    public function getPerimetersManager()
+    {
     }
-    
-    public function getPermissionsManager() {
+
+    public function getPermissionsManager()
+    {
         return $this->businessPermissionManager;
     }
 }
-
-?>
