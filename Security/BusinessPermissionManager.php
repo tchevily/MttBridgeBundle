@@ -12,23 +12,21 @@ use CanalTP\Sam\Ecore\ApplicationManagerBundle\Security\BusinessPermissionManage
 class BusinessPermissionManager implements BusinessPermissionManagerInterface
 {
     private $businessModule;
-    
+
     public function __construct($businessModule)
     {
         $this->businessModule = $businessModule;
     }
-    
+
     public function getPermissionManagementMode() {
-        
+
     }
-    
+
     public function getBusinessObjectTypes() {
-        
+
     }
-    
+
     public function getBusinessModules() {
      return $this->businessModule;
     }
 }
-
-?>

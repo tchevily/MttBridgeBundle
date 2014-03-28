@@ -1,3 +1,2 @@
-canal_tp_mtt_business_app_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: CanalTPMttBusinessAppBundle:Default:index }
+canal_tp_meth:
+    resource: "@CanalTPMttBundle/Resources/config/routing.yml"
