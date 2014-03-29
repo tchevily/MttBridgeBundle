@@ -2,9 +2,11 @@
 
 namespace CanalTP\MttBridgeBundle\Security;
 
-use CanalTP\Sam\Ecore\ApplicationManagerBundle\Security\BusinessComponentInterface;
-use CanalTP\MttBridgeBundle\Security\BusinessMenuItem;
 use Symfony\Component\DependencyInjection\Container;
+use CanalTP\MttBridgeBundle\Security\BusinessMenuItem;
+use CanalTP\Sam\Ecore\ApplicationManagerBundle\Security\BusinessComponentInterface;
+use CanalTP\Sam\Ecore\ApplicationManagerBundle\Security\BusinessPerimeterInterface;
+use CanalTP\Sam\Ecore\ApplicationManagerBundle\Security\BusinessPermissionInterface;
 
 /**
  * Description of BusinessComponent
@@ -14,12 +16,12 @@ use Symfony\Component\DependencyInjection\Container;
 class BusinessComponent implements BusinessComponentInterface
 {
     private $businessPermissionManager;
-    protected $container;
+    private $businessPerimeterManager;
 
-    public function __construct($businessPermissionManager, Container $container)
+    public function __construct(BusinessPermissionInterface $businessPermissionManager, BusinessPerimeterInterface $businessPerimeterManager)
     {
         $this->businessPermissionManager = $businessPermissionManager;
-        $this->container = $container;
+        $this->businessPerimeterManager = $businessPerimeterManager;
     }
 
     public function getId() {
@@ -66,8 +68,9 @@ class BusinessComponent implements BusinessComponentInterface
         return array($networks, $seasons);
     }
 
-    public function getPerimetersManager() {
-
+    public function getPerimetersManager()
+    {
+        return $this->businessPerimeterManager;
     }
 
     public function getPermissionsManager() {

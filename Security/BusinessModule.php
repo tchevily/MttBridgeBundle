@@ -6,11 +6,6 @@ use CanalTP\Sam\Ecore\ApplicationManagerBundle\Security\AbstractBusinessModule;
 
 class BusinessModule extends AbstractBusinessModule
 {
-    public function __construct($permissions)
-    {
-        $this->permissions = $permissions;
-    }
-
     public function getId()
     {
         return 1;
