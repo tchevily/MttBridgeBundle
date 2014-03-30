@@ -1,0 +1,7 @@
+parameters:
+    sam.business_perimeter_manager.mtt.class: CanalTP\MttBusinessAppBundle\Security\BusinessPerimeterManager
+
+services:
+    sam.business_perimeter_manager.mtt:
+        class: "%sam.business_perimeter_manager.mtt.class%"
+        arguments: ['@doctrine.orm.entity_manager']
