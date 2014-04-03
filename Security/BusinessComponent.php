@@ -41,7 +41,7 @@ class BusinessComponent implements BusinessComponentInterface
         $networks = new BusinessMenuItem();
         $networks->setAction('#');
         $networks->setName('Network');
-        $networks->setRoute('canal_tp_meth_homepage');
+        $networks->setRoute('canal_tp_mtt_homepage');
 
 
         $userNetworks = $userManager->getNetworks();
@@ -49,7 +49,7 @@ class BusinessComponent implements BusinessComponentInterface
             $network = new BusinessMenuItem();
             $network->setAction('#');
             $network->setName($userNetwork['external_id']);
-            $network->setRoute('canal_tp_meth_homepage');
+            $network->setRoute('canal_tp_mtt_homepage');
             $networks->addChild($network);
         }
 
