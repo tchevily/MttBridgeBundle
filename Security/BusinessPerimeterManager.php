@@ -4,6 +4,7 @@ namespace CanalTP\MttBusinessAppBundle\Security;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use CanalTP\Sam\Ecore\ApplicationManagerBundle\Security\BusinessPerimeterInterface;
+use CanalTP\Sam\Ecore\ApplicationManagerBundle\Security\BusinessPerimeter;
 
 class BusinessPerimeterManager implements BusinessPerimeterInterface
 {
@@ -44,7 +45,16 @@ class BusinessPerimeterManager implements BusinessPerimeterInterface
      */
     public function getPerimeters()
     {
-        return $this->repository->findAll();
+        $networks = $this->repository->findAll();
+
+        $perimeters = array();
+        foreach ($networks as $network) {
+            $perimeter = new BusinessPerimeter($network->getExternalId());
+            $perimeter->setId($network->getId());
+            $perimeters[] = $perimeter;
+        }
+
+        return $perimeters;
     }
 
     /**
