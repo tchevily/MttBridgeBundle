@@ -5,20 +5,21 @@ namespace CanalTP\MttBridgeBundle\Security;
 use Symfony\Component\DependencyInjection\Container;
 use CanalTP\MttBridgeBundle\Security\BusinessMenuItem;
 use CanalTP\Sam\Ecore\ApplicationManagerBundle\Security\BusinessComponentInterface;
-use CanalTP\Sam\Ecore\ApplicationManagerBundle\Security\BusinessPerimeterInterface;
+use CanalTP\Sam\Ecore\ApplicationManagerBundle\Security\BusinessPerimeterManagerInterface;
 use CanalTP\Sam\Ecore\ApplicationManagerBundle\Security\BusinessPermissionInterface;
 
 /**
  * Description of BusinessComponent
  *
  * @author akambi
+ * @author David Quintanel <david.quintanel@canaltp.fr>
  */
 class BusinessComponent implements BusinessComponentInterface
 {
     private $businessPermissionManager;
     private $businessPerimeterManager;
 
-    public function __construct(BusinessPermissionInterface $businessPermissionManager, BusinessPerimeterInterface $businessPerimeterManager)
+    public function __construct(BusinessPermissionInterface $businessPermissionManager, BusinessPerimeterManagerInterface $businessPerimeterManager)
     {
         $this->businessPermissionManager = $businessPermissionManager;
         $this->businessPerimeterManager = $businessPerimeterManager;
@@ -33,7 +34,11 @@ class BusinessComponent implements BusinessComponentInterface
         return 'Business component MTT';
     }
 
-    public function hasPerimeters() {
+    public function hasPerimeters()
+    {
+        $perimeters = $this->getPerimetersManager()->getPerimeters();
+
+        return !empty($perimeters);
     }
 
     public function getMenuItems()
