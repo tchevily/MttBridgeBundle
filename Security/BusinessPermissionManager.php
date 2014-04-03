@@ -18,12 +18,12 @@ class BusinessPermissionManager implements BusinessPermissionManagerInterface
         $this->businessModule = $businessModule;
     }
 
-    public function getPermissionManagementMode()
-    {
+    public function getPermissionManagementMode() {
+
     }
 
-    public function getBusinessObjectTypes()
-    {
+    public function getBusinessObjectTypes() {
+
     }
 
     public function getBusinessModules()
