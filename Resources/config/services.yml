@@ -1,4 +1,5 @@
 parameters:
+    sam.business_component.mtt.class: CanalTP\MttBusinessAppBundle\Security\BusinessComponent
     sam.business_module.mtt.class: CanalTP\MttBusinessAppBundle\Security\BusinessModule
     sam.business_permission_manager.mtt.class: CanalTP\MttBusinessAppBundle\Security\BusinessPermissionManager
     sam.business_perimeter_manager.mtt.class: CanalTP\MttBusinessAppBundle\Security\BusinessPerimeterManager
@@ -17,4 +18,9 @@ services:
     sam.business_perimeter_manager.mtt:
         class: "%sam.business_perimeter_manager.mtt.class%"
         arguments: ['@doctrine.orm.entity_manager']
+        public: false
+
+    sam.business_component.mtt:
+        class: "%sam.business_component.mtt.class%"
+        arguments: ['@sam.business_permission_manager.mtt', '@sam.business_perimeter_manager.mtt', '@canal_tp_mtt.user']
         public: false

@@ -3,6 +3,7 @@
 namespace CanalTP\MttBridgeBundle\Security;
 
 use Symfony\Component\DependencyInjection\Container;
+use CanalTP\MttBundle\Services\UserManager;
 use CanalTP\MttBridgeBundle\Security\BusinessMenuItem;
 use CanalTP\Sam\Ecore\ApplicationManagerBundle\Security\BusinessComponentInterface;
 use CanalTP\Sam\Ecore\ApplicationManagerBundle\Security\BusinessPerimeterManagerInterface;
@@ -18,8 +19,13 @@ class BusinessComponent implements BusinessComponentInterface
 {
     private $businessPermissionManager;
     private $businessPerimeterManager;
+    private $userManager;
 
-    public function __construct(BusinessPermissionInterface $businessPermissionManager, BusinessPerimeterManagerInterface $businessPerimeterManager)
+    public function __construct(
+        BusinessPermissionInterface $businessPermissionManager,
+        BusinessPerimeterManagerInterface $businessPerimeterManager,
+        UserManager $userManager
+    )
     {
         $this->businessPermissionManager = $businessPermissionManager;
         $this->businessPerimeterManager = $businessPerimeterManager;
@@ -43,7 +49,7 @@ class BusinessComponent implements BusinessComponentInterface
 
     public function getMenuItems()
     {
-        $userManager = $this->container->get('canal_tp_mtt.user');
+        $userManager = $this->userManager->get('canal_tp_mtt.user');
 
         $networks = new BusinessMenuItem();
         $networks->setAction('#');
