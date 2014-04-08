@@ -1,14 +1,18 @@
 {
-    "name": "canaltp/mtt-business-app",
+    "name": "canaltp/mtt-bridge-bundle",
     "type": "symfony-bundle",
-    "description": "Mtt business app bundle",
-    "keywords": [],
-    "homepage": "http://hg.prod.canaltp.fr/ctp/SymfonyBundles/CanalTPMttBusinessAppBundle.git",
+    "description": "Mtt SAM bridge bundle",
+    "keywords": ["sam", "mtt", "bridge"],
+    "homepage": "http://hg.prod.canaltp.fr/ctp/SymfonyBundles/CanalTPMttBridgeBundle.git",
     "license": "MIT",
     "authors": [
         {
             "name": "Akambi Fagbohoun",
             "email": "akambi.fagbohoun@canaltp.fr"
+        },
+        {
+            "name": "Kévin ZIEMIANSKI",
+            "email": "kevin.ziemianski@canaltp.fr"
         }
     ],
     "require": {
