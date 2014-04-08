@@ -1,6 +1,6 @@
 <?php
 
-namespace CanalTP\MttBusinessAppBundle\Security;
+namespace CanalTP\MttBridgeBundle\Security;
 
 use CanalTP\Sam\Ecore\ApplicationManagerBundle\Security\BusinessMenuItemInterface;
 

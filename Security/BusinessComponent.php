@@ -1,9 +1,9 @@
 <?php
 
-namespace CanalTP\MttBusinessAppBundle\Security;
+namespace CanalTP\MttBridgeBundle\Security;
 
 use CanalTP\Sam\Ecore\ApplicationManagerBundle\Security\BusinessComponentInterface;
-use CanalTP\MttBusinessAppBundle\Security\BusinessMenuItem;
+use CanalTP\MttBridgeBundle\Security\BusinessMenuItem;
 use Symfony\Component\DependencyInjection\Container;
 
 /**

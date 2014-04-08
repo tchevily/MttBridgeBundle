@@ -16,10 +16,10 @@
         }
     ],
     "require": {
-        "php": ">=5.3.2"
+        "php": ">=5.3.2",
+	"canaltp/mtt-bundle": "dev-ci"
     },
     "autoload": {
-        "psr-0": { "CanalTP\\MttBusinessAppBundle\\": "" }
-    },
-    "target-dir": "CanalTP/MttBusinessAppBundle/"
+        "psr-4": { "CanalTP\\MttBridgeBundle\\": "" }
+    }
 }
