@@ -3,20 +3,20 @@
 namespace CanalTP\MttBridgeBundle\Security;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use CanalTP\MttBundle\Services\NetworkManager;
 use CanalTP\SamEcoreApplicationManagerBundle\Security\BusinessPerimeterManagerInterface;
 use CanalTP\SamEcoreApplicationManagerBundle\Security\BusinessPerimeterInterface;
 use CanalTP\SamEcoreApplicationManagerBundle\Security\BusinessPerimeter;
-use Symfony\Component\Security\Core\UserInterface;
+use FOS\UserBundle\Model\UserInterface;
 
 class BusinessPerimeterManager implements BusinessPerimeterManagerInterface
 {
     private $repository;
     private $objectManager;
 
-    public function __construct(ObjectManager $objectManager)
+    public function __construct(NetworkManager $networkManager)
     {
-        $this->objectManager = $objectManager;
-        $this->repository = $objectManager->getRepository('CanalTPMttBundle:Network');
+        $this->networkManager = $networkManager;
     }
 
     public function getId()
@@ -37,7 +37,7 @@ class BusinessPerimeterManager implements BusinessPerimeterManagerInterface
      */
     public function addUserToPerimeter(UserInterface $user, BusinessPerimeterInterface $perimeter)
     {
-
+        $this->networkManager->addUserToNetwork($user->getId(), $perimeter->getId());
     }
 
     /**
@@ -47,10 +47,8 @@ class BusinessPerimeterManager implements BusinessPerimeterManagerInterface
      */
     public function getPerimeters()
     {
-        $networks = $this->repository->findAll();
-
         $perimeters = array();
-        foreach ($networks as $network) {
+        foreach ($this->networkManager->findAll() as $network) {
             $perimeter = new BusinessPerimeter($network->getExternalId());
             $perimeter->setId($network->getId());
             $perimeters[] = $perimeter;
