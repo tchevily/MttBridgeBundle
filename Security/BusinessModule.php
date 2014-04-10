@@ -2,7 +2,7 @@
 
 namespace CanalTP\MttBridgeBundle\Security;
 
-use CanalTP\Sam\Ecore\ApplicationManagerBundle\Security\AbstractBusinessModule;
+use CanalTP\SamEcoreApplicationManagerBundle\Security\AbstractBusinessModule;
 
 class BusinessModule extends AbstractBusinessModule
 {

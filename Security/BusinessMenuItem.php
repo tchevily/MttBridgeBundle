@@ -2,7 +2,7 @@
 
 namespace CanalTP\MttBridgeBundle\Security;
 
-use CanalTP\Sam\Ecore\ApplicationManagerBundle\Security\BusinessMenuItemInterface;
+use CanalTP\SamEcoreApplicationManagerBundle\Security\BusinessMenuItemInterface;
 
 /**
  * Description of BusinessMenuItem

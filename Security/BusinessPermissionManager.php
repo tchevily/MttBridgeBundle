@@ -2,7 +2,7 @@
 
 namespace CanalTP\MttBridgeBundle\Security;
 
-use CanalTP\Sam\Ecore\ApplicationManagerBundle\Security\BusinessPermissionInterface;
+use CanalTP\SamEcoreApplicationManagerBundle\Security\BusinessPermissionInterface;
 
 /**
  * Description of BusinessComponent

@@ -1,11 +1,11 @@
 <?php
 
-namespace CanalTP\MttBusinessAppBundle\Security;
+namespace CanalTP\MttBridgeBundle\Security;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use CanalTP\Sam\Ecore\ApplicationManagerBundle\Security\BusinessPerimeterManagerInterface;
-use CanalTP\Sam\Ecore\ApplicationManagerBundle\Security\BusinessPerimeterInterface;
-use CanalTP\Sam\Ecore\ApplicationManagerBundle\Security\BusinessPerimeter;
+use CanalTP\SamEcoreApplicationManagerBundle\Security\BusinessPerimeterManagerInterface;
+use CanalTP\SamEcoreApplicationManagerBundle\Security\BusinessPerimeterInterface;
+use CanalTP\SamEcoreApplicationManagerBundle\Security\BusinessPerimeter;
 use Symfony\Component\Security\Core\UserInterface;
 
 class BusinessPerimeterManager implements BusinessPerimeterManagerInterface

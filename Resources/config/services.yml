@@ -1,8 +1,8 @@
 parameters:
-    sam.business_component.mtt.class: CanalTP\MttBusinessAppBundle\Security\BusinessComponent
-    sam.business_module.mtt.class: CanalTP\MttBusinessAppBundle\Security\BusinessModule
-    sam.business_permission_manager.mtt.class: CanalTP\MttBusinessAppBundle\Security\BusinessPermissionManager
-    sam.business_perimeter_manager.mtt.class: CanalTP\MttBusinessAppBundle\Security\BusinessPerimeterManager
+    sam.business_component.mtt.class: CanalTP\MttBridgeBundle\Security\BusinessComponent
+    sam.business_module.mtt.class: CanalTP\MttBridgeBundle\Security\BusinessModule
+    sam.business_permission_manager.mtt.class: CanalTP\MttBridgeBundle\Security\BusinessPermissionManager
+    sam.business_perimeter_manager.mtt.class: CanalTP\MttBridgeBundle\Security\BusinessPerimeterManager
 
 services:
     sam.business_module.mtt:

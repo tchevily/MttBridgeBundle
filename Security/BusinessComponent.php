@@ -5,9 +5,9 @@ namespace CanalTP\MttBridgeBundle\Security;
 use Symfony\Component\DependencyInjection\Container;
 use CanalTP\MttBundle\Services\UserManager;
 use CanalTP\MttBridgeBundle\Security\BusinessMenuItem;
-use CanalTP\Sam\Ecore\ApplicationManagerBundle\Security\BusinessComponentInterface;
-use CanalTP\Sam\Ecore\ApplicationManagerBundle\Security\BusinessPerimeterManagerInterface;
-use CanalTP\Sam\Ecore\ApplicationManagerBundle\Security\BusinessPermissionInterface;
+use CanalTP\SamEcoreApplicationManagerBundle\Security\BusinessComponentInterface;
+use CanalTP\SamEcoreApplicationManagerBundle\Security\BusinessPerimeterManagerInterface;
+use CanalTP\SamEcoreApplicationManagerBundle\Security\BusinessPermissionInterface;
 
 /**
  * Description of BusinessComponent
