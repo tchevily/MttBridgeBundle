@@ -2,15 +2,10 @@
 
 namespace CanalTP\MttBridgeBundle\Security;
 
-use CanalTP\Sam\Ecore\ApplicationManagerBundle\Security\AbstractBusinessModule;
+use CanalTP\SamEcoreApplicationManagerBundle\Security\AbstractBusinessModule;
 
 class BusinessModule extends AbstractBusinessModule
 {
-    public function __construct($permissions)
-    {
-        $this->permissions = $permissions;
-    }
-
     public function getId()
     {
         return 1;

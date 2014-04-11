@@ -2,24 +2,33 @@
 
 namespace CanalTP\MttBridgeBundle\Security;
 
-use CanalTP\Sam\Ecore\ApplicationManagerBundle\Security\BusinessComponentInterface;
-use CanalTP\MttBridgeBundle\Security\BusinessMenuItem;
 use Symfony\Component\DependencyInjection\Container;
+use CanalTP\MttBundle\Services\UserManager;
+use CanalTP\MttBridgeBundle\Security\BusinessMenuItem;
+use CanalTP\SamEcoreApplicationManagerBundle\Security\BusinessComponentInterface;
+use CanalTP\SamEcoreApplicationManagerBundle\Security\BusinessPerimeterManagerInterface;
+use CanalTP\SamEcoreApplicationManagerBundle\Security\BusinessPermissionInterface;
 
 /**
  * Description of BusinessComponent
  *
  * @author akambi
+ * @author David Quintanel <david.quintanel@canaltp.fr>
  */
 class BusinessComponent implements BusinessComponentInterface
 {
     private $businessPermissionManager;
-    protected $container;
+    private $businessPerimeterManager;
+    private $userManager;
 
-    public function __construct($businessPermissionManager, Container $container)
+    public function __construct(
+        BusinessPermissionInterface $businessPermissionManager,
+        BusinessPerimeterManagerInterface $businessPerimeterManager,
+        UserManager $userManager
+    )
     {
         $this->businessPermissionManager = $businessPermissionManager;
-        $this->container = $container;
+        $this->businessPerimeterManager = $businessPerimeterManager;
     }
 
     public function getId() {
@@ -31,12 +40,16 @@ class BusinessComponent implements BusinessComponentInterface
         return 'Business component MTT';
     }
 
-    public function hasPerimeters() {
+    public function hasPerimeters()
+    {
+        $perimeters = $this->getPerimetersManager()->getPerimeters();
+
+        return !empty($perimeters);
     }
 
     public function getMenuItems()
     {
-        $userManager = $this->container->get('canal_tp_mtt.user');
+        $userManager = $this->userManager->get('canal_tp_mtt.user');
 
         $networks = new BusinessMenuItem();
         $networks->setAction('#');
@@ -66,8 +79,9 @@ class BusinessComponent implements BusinessComponentInterface
         return array($networks, $seasons);
     }
 
-    public function getPerimetersManager() {
-
+    public function getPerimetersManager()
+    {
+        return $this->businessPerimeterManager;
     }
 
     public function getPermissionsManager() {

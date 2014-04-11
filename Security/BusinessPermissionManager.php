@@ -2,14 +2,14 @@
 
 namespace CanalTP\MttBridgeBundle\Security;
 
-use CanalTP\Sam\Ecore\ApplicationManagerBundle\Security\BusinessPermissionManagerInterface;
+use CanalTP\SamEcoreApplicationManagerBundle\Security\BusinessPermissionInterface;
 
 /**
  * Description of BusinessComponent
  *
  * @author akambi
  */
-class BusinessPermissionManager implements BusinessPermissionManagerInterface
+class BusinessPermissionManager implements BusinessPermissionInterface
 {
     private $businessModule;
 
@@ -18,8 +18,18 @@ class BusinessPermissionManager implements BusinessPermissionManagerInterface
         $this->businessModule = $businessModule;
     }
 
-    public function getPermissionManagementMode() {
+    public function getId()
+    {
 
+    }
+
+    public function getName()
+    {
+
+    }
+
+    public function getPermissionManagementMode()
+    {
     }
 
     public function getBusinessObjectTypes() {
