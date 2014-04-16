@@ -7,7 +7,7 @@ use CanalTP\MttBundle\Services\UserManager;
 use CanalTP\MttBridgeBundle\Security\BusinessMenuItem;
 use CanalTP\SamEcoreApplicationManagerBundle\Security\BusinessComponentInterface;
 use CanalTP\SamEcoreApplicationManagerBundle\Security\BusinessPerimeterManagerInterface;
-use CanalTP\SamEcoreApplicationManagerBundle\Security\BusinessPermissionInterface;
+use CanalTP\SamEcoreApplicationManagerBundle\Security\BusinessPermissionManagerInterface;
 
 /**
  * Description of BusinessComponent
@@ -22,13 +22,14 @@ class BusinessComponent implements BusinessComponentInterface
     private $userManager;
 
     public function __construct(
-        BusinessPermissionInterface $businessPermissionManager,
+        BusinessPermissionManagerInterface $businessPermissionManager,
         BusinessPerimeterManagerInterface $businessPerimeterManager,
         UserManager $userManager
     )
     {
         $this->businessPermissionManager = $businessPermissionManager;
         $this->businessPerimeterManager = $businessPerimeterManager;
+        $this->userManager = $userManager;
     }
 
     public function getId() {
@@ -49,7 +50,7 @@ class BusinessComponent implements BusinessComponentInterface
 
     public function getMenuItems()
     {
-        $userManager = $this->userManager->get('canal_tp_mtt.user');
+        $userManager = $this->userManager;//->get('canal_tp_mtt.user');
 
         $networks = new BusinessMenuItem();
         $networks->setAction('#');

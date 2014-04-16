@@ -2,14 +2,14 @@
 
 namespace CanalTP\MttBridgeBundle\Security;
 
-use CanalTP\SamEcoreApplicationManagerBundle\Security\BusinessPermissionInterface;
+use CanalTP\SamEcoreApplicationManagerBundle\Security\BusinessPermissionManagerInterface;
 
 /**
  * Description of BusinessComponent
  *
  * @author akambi
  */
-class BusinessPermissionManager implements BusinessPermissionInterface
+class BusinessPermissionManager implements BusinessPermissionManagerInterface
 {
     private $businessModule;
 
