@@ -72,6 +72,16 @@ class BusinessPerimeterManager implements BusinessPerimeterManagerInterface
     }
 
     /**
+     * Delete a user from a perimeter
+     *
+     * @param UserInterface $user
+     */
+    public function deleteUserPerimeters(UserInterface $user)
+    {
+        $this->networkManager->deleteUserNetworks($user);
+    }
+
+    /**
      * Get a user's perimeters
      *
      * @param UserInterface $user
