@@ -13,6 +13,7 @@ class BusinessPerimeterManager implements BusinessPerimeterManagerInterface
 {
     private $repository;
     private $objectManager;
+    private $perimeters;
 
     public function __construct(NetworkManager $networkManager)
     {
@@ -47,14 +48,16 @@ class BusinessPerimeterManager implements BusinessPerimeterManagerInterface
      */
     public function getPerimeters()
     {
-        $perimeters = array();
-        foreach ($this->networkManager->findAll() as $network) {
-            $perimeter = new BusinessPerimeter($network->getExternalId());
-            $perimeter->setId($network->getId());
-            $perimeters[] = $perimeter;
+        if (null === $this->perimeters) {
+            $perimeters = array();
+            foreach ($this->networkManager->findAll() as $network) {
+                $perimeter = new BusinessPerimeter($network->getExternalId());
+                $perimeter->setId($network->getId());
+                $this->perimeters[] = $perimeter;
+            }
         }
 
-        return $perimeters;
+        return $this->perimeters;
     }
 
     /**
@@ -69,6 +72,16 @@ class BusinessPerimeterManager implements BusinessPerimeterManagerInterface
     }
 
     /**
+     * Delete a user from a perimeter
+     *
+     * @param UserInterface $user
+     */
+    public function deleteUserPerimeters(UserInterface $user)
+    {
+        $this->networkManager->deleteUserNetworks($user);
+    }
+
+    /**
      * Get a user's perimeters
      *
      * @param UserInterface $user
@@ -77,6 +90,16 @@ class BusinessPerimeterManager implements BusinessPerimeterManagerInterface
      */
     public function getUserPerimeters(UserInterface $user)
     {
+        $userPerimeters = array();
+        foreach ($this->networkManager->findUserNetworks($user) as $network) {
+            foreach ($this->getPerimeters() as $perimeter) {
+                if ($perimeter->getId() == $network['id'] && $perimeter->getName() == $network['external_id']) {
+                    $userPerimeters[] = $perimeter;
+                    break 1;
+                }
+            }
+        }
 
+        return $userPerimeters;
     }
 }

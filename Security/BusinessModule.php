@@ -8,16 +8,11 @@ class BusinessModule extends AbstractBusinessModule
 {
     public function getId()
     {
-        return 1;
+
     }
 
     public function getName()
     {
-        return 'test';
-    }
-
-    public function getPermissions()
-    {
-        return ($this->permissions);
+        return 'time_table_business_module';
     }
 }
