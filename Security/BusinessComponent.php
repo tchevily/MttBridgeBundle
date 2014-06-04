@@ -54,7 +54,7 @@ class BusinessComponent implements BusinessComponentInterface
 
         $networks = new BusinessMenuItem();
         $networks->setAction('#');
-        $networks->setName('Network');
+        $networks->setName('Réseaux');
         $networks->setRoute('canal_tp_mtt_homepage');
 
 
@@ -67,17 +67,7 @@ class BusinessComponent implements BusinessComponentInterface
             $networks->addChild($network);
         }
 
-        $seasons = new BusinessMenuItem();
-        $seasons->setAction('#');
-        $seasons->setName('Gestion des saisons');
-        $seasons->setRoute('canal_tp_mtt_season_list');
-        $seasons->setParameters(array(
-            'coverage_id' => $userNetworks[0]['external_coverage_id'],
-            'network_id' => $userNetworks[0]['external_id']
-        ));
-
-
-        return array($networks, $seasons);
+        return array($networks);
     }
 
     public function getPerimetersManager()
