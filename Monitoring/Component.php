@@ -2,39 +2,24 @@
 
 namespace CanalTP\MttBridgeBundle\Monitoring;
 
-use CanalTP\SamMonitoringComponent\MonitorableComponentInterface;
-use CanalTP\SamMonitoringComponent\MonitoringStateInterface as State;
+use CanalTP\SamMonitoringComponent\StateMonitorInterface as State;
+use CanalTP\SamMonitoringComponent\Component\AbstractComponentMonitor;
 
-class Component implements MonitorableComponentInterface
+class Component extends AbstractComponentMonitor
 {
-    protected $name;
-    protected $state;
-    protected $categories = array();
-
     public function __construct()
     {
+        parent::__construct();
+
         $this->name = 'TimeTable';
         $this->state = State::UP;
-        $this->categories = array();
 
         $this->initCategories();
     }
 
     private function initCategories() {
-        $this->categories[] = new Category();
-        $this->categories[] = new Category();
-        $this->categories[] = new Category();
-    }
-
-    public function getName() {
-        return ($this->name);
-    }
-
-    public function getState() {
-        return ($this->state);
-    }
-
-    public function getCategories() {
-        return ($this->categories);
+        $this->addCategory(new Category());
+        $this->addCategory(new Category());
+        $this->addCategory(new Category());
     }
 }

@@ -2,31 +2,20 @@
 
 namespace CanalTP\MttBridgeBundle\Monitoring;
 
-use CanalTP\SamMonitoringComponent\MonitorableCategoryInterface;
+use CanalTP\SamMonitoringComponent\Category\AbstractCategoryMonitor;
 
-class Category implements MonitorableCategoryInterface
+class Category extends AbstractCategoryMonitor
 {
-    protected $name;
-    protected $services;
-
     public function __construct()
     {
-        $this->name = 'CATEGORY_NAME';
-        $this->services = array();
+        parent::__construct();
 
+        $this->name = 'CATEGORY_NAME';
         $this->initServices();
     }
 
     private function initServices() {
-        $this->services[] = new Service();
-        $this->services[] = new Service();
-    }
-
-    public function getName() {
-        return ($this->name);
-    }
-
-    public function getServices() {
-        return ($this->services);
+        $this->addService(new Service());
+        $this->addService(new Service());
     }
 }

@@ -2,25 +2,19 @@
 
 namespace CanalTP\MttBridgeBundle\Monitoring;
 
-use CanalTP\SamMonitoringComponent\MonitorableServiceInterface;
-use CanalTP\SamMonitoringComponent\MonitoringStateInterface as State;
+use CanalTP\SamMonitoringComponent\Service\AbstractServiceMonitor;
+use CanalTP\SamMonitoringComponent\StateMonitorInterface as State;
 
-class Service implements MonitorableServiceInterface
+class Service extends AbstractServiceMonitor
 {
     protected $name;
     protected $state;
 
     public function __construct()
     {
+        parent::__construct();
+
         $this->name = 'SERVICE_NAME';
         $this->state = State::UP;
-    }
-
-    public function getName() {
-        return ($this->name);
-    }
-
-    public function getState() {
-        return ($this->state);
     }
 }
