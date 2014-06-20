@@ -3,6 +3,7 @@ parameters:
     sam.business_module.mtt.class: CanalTP\MttBridgeBundle\Security\BusinessModule
     sam.business_permission_manager.mtt.class: CanalTP\MttBridgeBundle\Security\BusinessPermissionManager
     sam.business_perimeter_manager.mtt.class: CanalTP\MttBridgeBundle\Security\BusinessPerimeterManager
+    sam.business_monitoring.mtt.class: CanalTP\MttBridgeBundle\Monitoring\Component
 
 services:
     sam.business_module.mtt:
@@ -24,3 +25,7 @@ services:
         class: "%sam.business_component.mtt.class%"
         arguments: ['@sam.business_permission_manager.mtt', '@sam.business_perimeter_manager.mtt', '@canal_tp_mtt.user']
         public: false
+
+    sam.business_monitoring.mtt:
+        class: "%sam.business_monitoring.mtt.class%"
+        public: true
