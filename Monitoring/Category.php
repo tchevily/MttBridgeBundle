@@ -13,6 +13,8 @@ class Category implements MonitorableCategoryInterface
     {
         $this->name = 'CATEGORY_NAME';
         $this->services = array();
+
+        $this->initServices();
     }
 
     private function initServices() {
