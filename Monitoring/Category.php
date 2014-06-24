@@ -2,9 +2,9 @@
 
 namespace CanalTP\MttBridgeBundle\Monitoring;
 
-use CanalTP\SamMonitoringComponent\Category\AbstractCategoryMonitor;
+use CanalTP\SamMonitoringComponent\Category\CategoryMonitor;
 
-class Category extends AbstractCategoryMonitor
+class Category extends CategoryMonitor
 {
     public function __construct()
     {
