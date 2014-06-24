@@ -13,13 +13,5 @@ class Component extends AbstractComponentMonitor
 
         $this->name = 'TimeTable';
         $this->state = State::UP;
-
-        $this->initCategories();
-    }
-
-    private function initCategories() {
-        $this->addCategory(new Category());
-        $this->addCategory(new Category());
-        $this->addCategory(new Category());
     }
 }
