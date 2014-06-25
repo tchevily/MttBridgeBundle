@@ -39,13 +39,13 @@ services:
 
     mtt.service_monitoring.ws:
         class: "%sam.service_monitoring.http.rest.class%"
-        arguments: ['http://samback/app_dev.php/mtt/urlduwebservice', 'ws']
+        arguments: ['http://samback/app_dev.php/mtt/urlduwebservice', 'Webservice of TimeTable (PAF)']
         tags:
             - { name: service_monitoring, category: Tech }
 
     mtt.service_monitoring.login:
         class: "%sam.service_monitoring.http.rest.class%"
-        arguments: ['http://samback/app_dev.php/admin/login', 'login']
+        arguments: ['http://samback/app_dev.php/admin/login', 'TimeTable Application']
         tags:
             - { name: service_monitoring, category: Business }
 
