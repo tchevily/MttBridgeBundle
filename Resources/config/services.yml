@@ -36,15 +36,27 @@ services:
         arguments: [%database_host%, %database_port%, %database_name%, %database_user%, %database_password%]
         tags:
             - { name: service_monitoring, category: Tech }
-            
+
     mtt.service_monitoring.ws:
-        class: "%sam.service_monitoring.rest.class%"
-        arguments: ['http://samback/app_dev.php/mtt/urlduwebservice', 'ws']
+        class: "%sam.service_monitoring.http.rest.class%"
+        arguments: ['http://samback/app_dev.php/mtt/urlduwebservice', 'Webservice of TimeTable (PAF)']
         tags:
             - { name: service_monitoring, category: Tech }
-            
+
     mtt.service_monitoring.login:
-        class: "%sam.service_monitoring.rest.class%"
-        arguments: ['http://samback/app_dev.php/admin/login', 'login']
+        class: "%sam.service_monitoring.http.rest.class%"
+        arguments: ['http://samback/app_dev.php/admin/login', 'TimeTable Application']
         tags:
             - { name: service_monitoring, category: Business }
+
+    mtt.service_monitoring.rabbit_mq:
+        class: "%sam.service_monitoring.message_broker.rabbit_mq.class%"
+        arguments: [%canal_tp_mtt.amqp_server_host%, %canal_tp_mtt.amqp_server_port%, %canal_tp_mtt.amqp_server_vhost%, %canal_tp_mtt.amqp_server_user%, %canal_tp_mtt.amqp_server_pass%]
+        tags:
+            - { name: service_monitoring, category: Tech }
+
+    mtt.service_monitoring.media_manager:
+        class: "%sam.service_monitoring.media_manager.class%"
+        arguments: ['/srv/mhsmedias-ws.ctp.internal.canaltp.fr']
+        tags:
+            - { name: service_monitoring, category: Tech }
