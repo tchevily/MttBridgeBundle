@@ -5,7 +5,6 @@ parameters:
     sam.business_perimeter_manager.mtt.class: CanalTP\MttBridgeBundle\Security\BusinessPerimeterManager
     # Monitoring
     sam.business_monitoring.mtt.class: CanalTP\MttBridgeBundle\Monitoring\Component
-    sam.service_monitoring.database.psql.class: CanalTP\SamMonitoringComponent\Service\Database\Psql
 
 services:
     sam.business_module.mtt:
@@ -36,4 +35,16 @@ services:
         class: "%sam.service_monitoring.database.psql.class%"
         arguments: [%database_host%, %database_port%, %database_name%, %database_user%, %database_password%]
         tags:
-            - { name: service_monitoring, category: database }
+            - { name: service_monitoring, category: Tech }
+            
+    mtt.service_monitoring.ws:
+        class: "%sam.service_monitoring.database.rest.class%"
+        arguments: ['http://samback/app_dev.php/mtt/urlduwebservice', 'ws']
+        tags:
+            - { name: service_monitoring, category: Tech }
+            
+    mtt.service_monitoring.login:
+        class: "%sam.service_monitoring.database.rest.class%"
+        arguments: ['http://samback/app_dev.php/admin/login', 'login']
+        tags:
+            - { name: service_monitoring, category: Business }
