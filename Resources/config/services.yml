@@ -37,15 +37,21 @@ services:
         tags:
             - { name: service_monitoring, category: Tech }
 
-    mtt.service_monitoring.ws:
+    mtt.service_monitoring.supervisord:
         class: "%sam.service_monitoring.http.rest.class%"
-        arguments: ['http://samback/app_dev.php/mtt/urlduwebservice', 'Webservice of TimeTable (PAF)']
+        arguments: [%monitoring.sam.supervisord.url%, 'Supervisord']
+        tags:
+            - { name: service_monitoring, category: Tech }
+
+    mtt.service_monitoring.pdf_generator:
+        class: "%sam.service_monitoring.http.rest.class%"
+        arguments: [%monitoring.sam.pdf_generator.url%, 'Pdf Generator']
         tags:
             - { name: service_monitoring, category: Tech }
 
     mtt.service_monitoring.login:
         class: "%sam.service_monitoring.http.rest.class%"
-        arguments: ['http://samback/app_dev.php/admin/login', 'TimeTable Application']
+        arguments: [%monitoring.sam.host%, 'TimeTable Application', 302]
         tags:
             - { name: service_monitoring, category: Business }
 
@@ -57,6 +63,6 @@ services:
 
     mtt.service_monitoring.media_manager:
         class: "%sam.service_monitoring.media_manager.class%"
-        arguments: ['/srv/mhsmedias-ws.ctp.internal.canaltp.fr']
+        arguments: [%monitoring.mtt.media_manager.path%]
         tags:
             - { name: service_monitoring, category: Tech }
