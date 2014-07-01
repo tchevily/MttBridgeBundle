@@ -14,21 +14,21 @@ class Component extends AbstractComponentMonitor
         $this->name = 'TimeTable';
     }
 
-    private function checkServices($category)
+    private function initServicesState($category)
     {
         foreach ($category->getServices() as $service) {
             if ($service->getState() == State::DOWN) {
-                $this->state = State::DOWN;
+                $this->setState(State::DOWN);
                 break;
             }
         }
     }
 
-    private function checkCategories()
+    private function initCategoriesState()
     {
         foreach ($this->categories as $category) {
-            $this->checkServices($category);
-            if ($this->state == State::DOWN) {
+            $this->initServicesState($category);
+            if ($this->getState() == State::DOWN) {
                 break;
             }
         }
@@ -38,7 +38,7 @@ class Component extends AbstractComponentMonitor
     {
         parent::check();
 
-        $this->checkCategories();
-        $this->state = ($this->state == State::UNKNOWN) ? State::UP: $this->state;
+        $this->initCategoriesState();
+        $this->setState(($this->getState() == State::UNKNOWN) ? State::UP : $this->getState());
     }
 }
