@@ -66,3 +66,9 @@ services:
         arguments: [%monitoring.mtt.media_manager.path%]
         tags:
             - { name: service_monitoring, category: Tech }
+
+    mtt.service_monitoring.navitia:
+        class: "%sam.service_monitoring.http.rest.class%"
+        arguments: [%navitia_url%, 'Navitia']
+        tags:
+            - { name: service_monitoring, category: Tech }
