@@ -31,8 +31,8 @@ services:
     sam.business_monitoring.mtt:
         class: "%sam.business_monitoring.mtt.class%"
 
-    mtt.service_monitoring.database.psql:
-        class: "%sam.service_monitoring.database.psql.class%"
+    mtt.service_monitoring.database.pgsql:
+        class: "%sam.service_monitoring.database.pgsql.class%"
         arguments: [%database_host%, %database_port%, %database_name%, %database_user%, %database_password%]
         tags:
             - { name: service_monitoring, category: Tech }
