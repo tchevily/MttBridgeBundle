@@ -1,15 +1,14 @@
 <?php
 
-namespace CanalTP\MttBridgeBundle\Security;
+namespace CanalTP\MttBridgeBundle\Perimeter;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use CanalTP\MttBundle\Services\NetworkManager;
-use CanalTP\SamEcoreApplicationManagerBundle\Security\BusinessPerimeterManagerInterface;
-use CanalTP\SamEcoreApplicationManagerBundle\Security\BusinessPerimeterInterface;
-use CanalTP\SamEcoreApplicationManagerBundle\Security\BusinessPerimeter;
+use CanalTP\SamEcoreApplicationManagerBundle\Perimeter\AbstractBusinessPerimeterManager;
+use CanalTP\SamEcoreApplicationManagerBundle\Perimeter\BusinessPerimeterInterface;
+use CanalTP\SamEcoreApplicationManagerBundle\Perimeter\BusinessPerimeter;
 use FOS\UserBundle\Model\UserInterface;
 
-class BusinessPerimeterManager implements BusinessPerimeterManagerInterface
+class BusinessPerimeterManager extends AbstractBusinessPerimeterManager
 {
     private $repository;
     private $objectManager;
@@ -18,16 +17,6 @@ class BusinessPerimeterManager implements BusinessPerimeterManagerInterface
     public function __construct(NetworkManager $networkManager)
     {
         $this->networkManager = $networkManager;
-    }
-
-    public function getId()
-    {
-
-    }
-
-    public function getName()
-    {
-
     }
 
     /**

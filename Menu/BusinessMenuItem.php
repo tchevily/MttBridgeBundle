@@ -1,15 +1,15 @@
 <?php
 
-namespace CanalTP\MttBridgeBundle\Security;
+namespace CanalTP\MttBridgeBundle\Menu;
 
-use CanalTP\SamEcoreApplicationManagerBundle\Security\BusinessMenuItemInterface;
+use CanalTP\SamEcoreApplicationManagerBundle\Menu\AbstractBusinessMenuItem;
 
 /**
  * Description of BusinessMenuItem
  *
  * @author Kévin Ziemianski <kevin.ziemianski@canaltp.fr>
  */
-class BusinessMenuItem implements BusinessMenuItemInterface
+class BusinessMenuItem implements AbstractBusinessMenuItem
 {
     protected $action;
     protected $children = array();

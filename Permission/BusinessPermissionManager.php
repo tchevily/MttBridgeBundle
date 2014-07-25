@@ -1,31 +1,21 @@
 <?php
 
-namespace CanalTP\MttBridgeBundle\Security;
+namespace CanalTP\MttBridgeBundle\Permission;
 
-use CanalTP\SamEcoreApplicationManagerBundle\Security\BusinessPermissionManagerInterface;
+use CanalTP\SamEcoreApplicationManagerBundle\Permission\AbstractBusinessPermissionManager;
 
 /**
  * Description of BusinessComponent
  *
  * @author akambi
  */
-class BusinessPermissionManager implements BusinessPermissionManagerInterface
+class BusinessPermissionManager extends AbstractBusinessPermissionManager
 {
     private $businessModule;
 
     public function __construct($businessModule)
     {
         $this->businessModule = $businessModule;
-    }
-
-    public function getId()
-    {
-
-    }
-
-    public function getName()
-    {
-
     }
 
     public function getPermissionManagementMode()

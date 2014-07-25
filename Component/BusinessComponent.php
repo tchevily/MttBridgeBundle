@@ -1,13 +1,12 @@
 <?php
 
-namespace CanalTP\MttBridgeBundle\Security;
+namespace CanalTP\MttBridgeBundle\Component;
 
-use Symfony\Component\DependencyInjection\Container;
 use CanalTP\MttBundle\Services\UserManager;
-use CanalTP\MttBridgeBundle\Security\BusinessMenuItem;
-use CanalTP\SamEcoreApplicationManagerBundle\Security\BusinessComponentInterface;
-use CanalTP\SamEcoreApplicationManagerBundle\Security\BusinessPerimeterManagerInterface;
-use CanalTP\SamEcoreApplicationManagerBundle\Security\BusinessPermissionManagerInterface;
+use CanalTP\MttBridgeBundle\Menu\BusinessMenuItem;
+use CanalTP\SamEcoreApplicationManagerBundle\Component\AbstractBusinessComponent;
+use CanalTP\SamEcoreApplicationManagerBundle\Perimeter\BusinessPerimeterManagerInterface;
+use CanalTP\SamEcoreApplicationManagerBundle\Permission\BusinessPermissionManagerInterface;
 
 /**
  * Description of BusinessComponent
@@ -15,7 +14,7 @@ use CanalTP\SamEcoreApplicationManagerBundle\Security\BusinessPermissionManagerI
  * @author akambi
  * @author David Quintanel <david.quintanel@canaltp.fr>
  */
-class BusinessComponent implements BusinessComponentInterface
+class BusinessComponent extends AbstractBusinessComponent
 {
     private $businessPermissionManager;
     private $businessPerimeterManager;
