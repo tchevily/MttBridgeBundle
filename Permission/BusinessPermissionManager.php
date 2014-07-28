@@ -8,6 +8,7 @@ use CanalTP\SamEcoreApplicationManagerBundle\Permission\AbstractBusinessPermissi
  * Description of BusinessComponent
  *
  * @author akambi
+ * @author Kévin ZIEMIANSKI <kevin.ziemianski@canaltp.fr>
  */
 class BusinessPermissionManager extends AbstractBusinessPermissionManager
 {

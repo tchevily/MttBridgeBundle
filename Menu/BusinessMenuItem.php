@@ -9,7 +9,7 @@ use CanalTP\SamEcoreApplicationManagerBundle\Menu\AbstractBusinessMenuItem;
  *
  * @author Kévin Ziemianski <kevin.ziemianski@canaltp.fr>
  */
-class BusinessMenuItem implements AbstractBusinessMenuItem
+class BusinessMenuItem extends AbstractBusinessMenuItem
 {
     protected $action;
     protected $children = array();
