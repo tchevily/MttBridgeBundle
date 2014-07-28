@@ -18,14 +18,6 @@ class BusinessPermissionManager extends AbstractBusinessPermissionManager
         $this->businessModule = $businessModule;
     }
 
-    public function getPermissionManagementMode()
-    {
-    }
-
-    public function getBusinessObjectTypes() {
-
-    }
-
     public function getBusinessModules()
     {
         return $this->businessModule;

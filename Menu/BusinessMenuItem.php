@@ -35,10 +35,6 @@ class BusinessMenuItem implements AbstractBusinessMenuItem
         return $this->children;
     }
 
-    public function getId() {
-
-    }
-
     public function setName($name) {
         $this->name = $name;
     }

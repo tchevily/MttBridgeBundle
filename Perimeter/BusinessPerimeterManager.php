@@ -10,8 +10,6 @@ use FOS\UserBundle\Model\UserInterface;
 
 class BusinessPerimeterManager extends AbstractBusinessPerimeterManager
 {
-    private $repository;
-    private $objectManager;
     private $perimeters;
 
     public function __construct(NetworkManager $networkManager)
@@ -47,17 +45,6 @@ class BusinessPerimeterManager extends AbstractBusinessPerimeterManager
         }
 
         return $this->perimeters;
-    }
-
-    /**
-     * Delete a user from a perimeter
-     *
-     * @param UserInterface              $user
-     * @param BusinessPerimeterInterface $perimeter
-     */
-    public function deleteUserFromPerimeter(UserInterface $user, BusinessPerimeterInterface $perimeter)
-    {
-
     }
 
     /**

@@ -6,11 +6,6 @@ use CanalTP\SamEcoreApplicationManagerBundle\Permission\AbstractBusinessPermissi
 
 class BusinessPermissionModule extends AbstractBusinessPermissionModule
 {
-    public function getId()
-    {
-
-    }
-
     public function getName()
     {
         return 'time_table_business_module';
