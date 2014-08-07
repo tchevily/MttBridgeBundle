@@ -7,6 +7,9 @@ use CanalTP\MttBridgeBundle\Menu\BusinessMenuItem;
 use CanalTP\SamEcoreApplicationManagerBundle\Component\AbstractBusinessComponent;
 use CanalTP\SamEcoreApplicationManagerBundle\Perimeter\BusinessPerimeterManagerInterface;
 use CanalTP\SamEcoreApplicationManagerBundle\Permission\BusinessPermissionManagerInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\DependencyInjection\Container;
+use CanalTP\MttBridgeBundle\Menu\MenuManager;
 
 /**
  * Description of BusinessComponent
@@ -18,20 +21,21 @@ class BusinessComponent extends AbstractBusinessComponent
 {
     private $businessPermissionManager;
     private $businessPerimeterManager;
-    private $userManager;
+    private $menuManager;
 
     public function __construct(
         BusinessPermissionManagerInterface $businessPermissionManager,
         BusinessPerimeterManagerInterface $businessPerimeterManager,
-        UserManager $userManager
+        MenuManager $menuManager
     )
     {
         $this->businessPermissionManager = $businessPermissionManager;
         $this->businessPerimeterManager = $businessPerimeterManager;
-        $this->userManager = $userManager;
+        $this->menuManager = $menuManager;
     }
 
-    public function getId() {
+    public function getId()
+    {
         return 'mtt_business_component';
     }
 
@@ -49,24 +53,7 @@ class BusinessComponent extends AbstractBusinessComponent
 
     public function getMenuItems()
     {
-        $userManager = $this->userManager;//->get('canal_tp_mtt.user');
-
-        $networks = new BusinessMenuItem();
-        $networks->setAction('#');
-        $networks->setName('Réseaux');
-        $networks->setRoute('canal_tp_mtt_homepage');
-
-
-        $userNetworks = $userManager->getNetworks();
-        foreach ($userNetworks as $userNetwork) {
-            $network = new BusinessMenuItem();
-            $network->setAction('#');
-            $network->setName($userNetwork['external_id']);
-            $network->setRoute('canal_tp_mtt_homepage');
-            $networks->addChild($network);
-        }
-
-        return array($networks);
+        return $this->menuManager->getMenu();
     }
 
     public function getPerimetersManager()
@@ -74,7 +61,8 @@ class BusinessComponent extends AbstractBusinessComponent
         return $this->businessPerimeterManager;
     }
 
-    public function getPermissionsManager() {
+    public function getPermissionsManager()
+    {
         return $this->businessPermissionManager;
     }
 }
