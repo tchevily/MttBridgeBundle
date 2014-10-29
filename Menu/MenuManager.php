@@ -61,7 +61,7 @@ class MenuManager
         // season menu
         if ($this->container->get('security.context')->isGranted('BUSINESS_MANAGE_SEASON')) {
             $seasonManager = $this->container->get('canal_tp_mtt.season_manager');
-            $networkSeasons = $seasonManager->findAllByNetworkId($currentNetwork);
+            $networkSeasons = $seasonManager->findAllByExternalNetworkId($currentNetwork);
             $seasons = new BusinessMenuItem();
 
             if (count($networkSeasons) >= 1) {
