@@ -32,13 +32,14 @@ class BusinessPerimeterManager extends AbstractBusinessPerimeterManager
      * Get the perimeters
      *
      * @return BusinessPerimeterInterface[] The perimeters
+     * @DeadCode, it seems
      */
     public function getPerimeters()
     {
         if (null === $this->perimeters) {
             $perimeters = array();
             foreach ($this->networkManager->findAll() as $network) {
-                $perimeter = new BusinessPerimeter($network->getExternalId());
+                $perimeter = new BusinessPerimeter($network->getExternalNetworkId());
                 $perimeter->setId($network->getId());
                 $this->perimeters[] = $perimeter;
             }
