@@ -136,6 +136,9 @@ class MenuManager
             $customer = new BusinessMenuItem();
             $customer->setName($translator->trans('menu.customer_manage'));
             $customer->setRoute('canal_tp_mtt_customer_list');
+            $customer->setParameters(array(
+                'externalNetworkId' => $currentNetwork
+            ));
 
             $menu[] = $customer;
         }
