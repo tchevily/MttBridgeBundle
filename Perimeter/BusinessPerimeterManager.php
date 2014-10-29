@@ -1,33 +1,20 @@
 <?php
 
-namespace CanalTP\MttBridgeBundle\Security;
+namespace CanalTP\MttBridgeBundle\Perimeter;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use CanalTP\MttBundle\Services\NetworkManager;
-use CanalTP\SamEcoreApplicationManagerBundle\Security\BusinessPerimeterManagerInterface;
-use CanalTP\SamEcoreApplicationManagerBundle\Security\BusinessPerimeterInterface;
-use CanalTP\SamEcoreApplicationManagerBundle\Security\BusinessPerimeter;
+use CanalTP\SamEcoreApplicationManagerBundle\Perimeter\AbstractBusinessPerimeterManager;
+use CanalTP\SamEcoreApplicationManagerBundle\Perimeter\BusinessPerimeterInterface;
+use CanalTP\SamEcoreApplicationManagerBundle\Perimeter\BusinessPerimeter;
 use FOS\UserBundle\Model\UserInterface;
 
-class BusinessPerimeterManager implements BusinessPerimeterManagerInterface
+class BusinessPerimeterManager extends AbstractBusinessPerimeterManager
 {
-    private $repository;
-    private $objectManager;
     private $perimeters;
 
     public function __construct(NetworkManager $networkManager)
     {
         $this->networkManager = $networkManager;
-    }
-
-    public function getId()
-    {
-
-    }
-
-    public function getName()
-    {
-
     }
 
     /**
@@ -58,17 +45,6 @@ class BusinessPerimeterManager implements BusinessPerimeterManagerInterface
         }
 
         return $this->perimeters;
-    }
-
-    /**
-     * Delete a user from a perimeter
-     *
-     * @param UserInterface              $user
-     * @param BusinessPerimeterInterface $perimeter
-     */
-    public function deleteUserFromPerimeter(UserInterface $user, BusinessPerimeterInterface $perimeter)
-    {
-
     }
 
     /**

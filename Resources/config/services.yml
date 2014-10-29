@@ -1,8 +1,9 @@
 parameters:
-    sam.business_component.mtt.class: CanalTP\MttBridgeBundle\Security\BusinessComponent
-    sam.business_module.mtt.class: CanalTP\MttBridgeBundle\Security\BusinessModule
-    sam.business_permission_manager.mtt.class: CanalTP\MttBridgeBundle\Security\BusinessPermissionManager
-    sam.business_perimeter_manager.mtt.class: CanalTP\MttBridgeBundle\Security\BusinessPerimeterManager
+    sam.business_component.mtt.class: CanalTP\MttBridgeBundle\Component\BusinessComponent
+    sam.business_module.mtt.class: CanalTP\MttBridgeBundle\Permission\BusinessPermissionModule
+    sam.business_permission_manager.mtt.class: CanalTP\MttBridgeBundle\Permission\BusinessPermissionManager
+    sam.business_perimeter_manager.mtt.class: CanalTP\MttBridgeBundle\Perimeter\BusinessPerimeterManager
+    sam.menu_manager.mtt.class: CanalTP\MttBridgeBundle\Menu\MenuManager
     # Monitoring
     sam.business_monitoring.mtt.class: CanalTP\MttBridgeBundle\Monitoring\Component
 
@@ -21,10 +22,15 @@ services:
         class: "%sam.business_perimeter_manager.mtt.class%"
         arguments: ['@canal_tp_mtt.network_manager']
         public: false
+        
+    sam.menu_manager.mtt:
+        class: %sam.menu_manager.mtt.class%
+        arguments: ['@canal_tp_mtt.user', @service_container]
+        public: false
 
     sam.business_component.mtt:
         class: "%sam.business_component.mtt.class%"
-        arguments: ['@sam.business_permission_manager.mtt', '@sam.business_perimeter_manager.mtt', '@canal_tp_mtt.user']
+        arguments: ['@sam.business_permission_manager.mtt', '@sam.business_perimeter_manager.mtt', @sam.menu_manager.mtt]
         public: false
 
     # Monitoring
