@@ -37,45 +37,51 @@ class MenuManager
         $menu = array();
 
         if (count($userNetworks) >= 1) {
-            $networks = new BusinessMenuItem();
-            $networks->setName($translator->trans('menu.networks'));
-            $networks->setRoute('canal_tp_mtt_network_list');
+            $perimeters = new BusinessMenuItem();
+            $perimeters->setName($translator->trans('menu.networks'));
+            $perimeters->setRoute('canal_tp_mtt_network_list');
             $currentExternalNetworkId = ($currentExternalNetworkId == null) ? $userNetworks->first()->getExternalNetworkId() : $currentExternalNetworkId;
             foreach ($userNetworks as $userNetwork) {
                 $explodedId = explode(':', $userNetwork->getExternalNetworkId());
-                $network = new BusinessMenuItem();
-                $network->setName($explodedId[1]);
-                $network->setRoute('canal_tp_mtt_homepage');
-                $network->setParameters(array('externalNetworkId' => $userNetwork->getExternalNetworkId()));
+                $perimeter = new BusinessMenuItem();
+                $perimeter->setName($explodedId[1]);
+                $perimeter->setRoute('canal_tp_mtt_homepage');
+                $perimeter->setParameters(array('externalNetworkId' => $userNetwork->getExternalNetworkId()));
                 if ($currentExternalNetworkId == $userNetwork->getExternalNetworkId()) {
-                    $network->setActive();
+                    $perimeter->setActive();
                 }
-                $networks->addChild($network);
+                $perimeters->addChild($perimeter);
             }
 
-            $menu[] = $networks;
+            $menu[] = $perimeters;
         }
 
         $currentNetwork = is_null($currentExternalNetworkId) ? $userNetworks->first()->getExternalNetworkId() : $currentExternalNetworkId;
 
+        $securityContext = $this->container->get('security.context');
         // season menu
-        if ($this->container->get('security.context')->isGranted('BUSINESS_MANAGE_SEASON')) {
+        if ($securityContext->isGranted('BUSINESS_MANAGE_SEASON')) {
             $seasonManager = $this->container->get('canal_tp_mtt.season_manager');
-            $networkSeasons = $seasonManager->findAllByExternalNetworkId($currentNetwork);
+            $perimeterManager = $this->container->get('nmm.perimeter_manager');
+            $perimeter = $perimeterManager->findOneByExternalNetworkId(
+                $securityContext->getToken()->getUser(),
+                $currentNetwork
+            );
+            $perimeterSeasons = $seasonManager->findByPerimeter($perimeter);
             $seasons = new BusinessMenuItem();
 
-            if (count($networkSeasons) >= 1) {
+            if (count($perimeterSeasons) >= 1) {
                 $seasons->setName($translator->trans('menu.seasons'));
                 $seasons->setRoute(null);
-                foreach ($networkSeasons as $networkSeason) {
+                foreach ($perimeterSeasons as $perimeterSeason) {
                     $season = new BusinessMenuItem();
-                    $season->setName($networkSeason->getTitle());
+                    $season->setName($perimeterSeason->getTitle());
                     $season->setRoute('canal_tp_mtt_stop_point_list_defaults');
                     $season->setParameters(array(
                         'externalNetworkId' => $currentNetwork,
-                        'seasonId' => $networkSeason->getId()
+                        'seasonId' => $perimeterSeason->getId()
                     ));
-                    if ($currentSeasonId == $networkSeason->getId()) {
+                    if ($currentSeasonId == $perimeterSeason->getId()) {
                         $season->setActive();
                     }
                     $seasons->addChild($season);
