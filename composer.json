@@ -3,7 +3,7 @@
     "type": "symfony-bundle",
     "description": "Mtt SAM bridge bundle",
     "keywords": ["sam", "mtt", "bridge"],
-    "homepage": "http://hg.prod.canaltp.fr/ctp/SymfonyBundles/CanalTPMttBridgeBundle.git",
+    "homepage": "https://github.com/CanalTP/MttBridgeBundle",
     "license": "MIT",
     "authors": [
         {
