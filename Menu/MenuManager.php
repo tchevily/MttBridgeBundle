@@ -64,7 +64,7 @@ class MenuManager
             $seasonManager = $this->container->get('canal_tp_mtt.season_manager');
             $perimeterManager = $this->container->get('nmm.perimeter_manager');
             $perimeter = $perimeterManager->findOneByExternalNetworkId(
-                $securityContext->getToken()->getUser(),
+                $securityContext->getToken()->getUser()->getCustomer(),
                 $currentNetwork
             );
             $perimeterSeasons = $seasonManager->findByPerimeter($perimeter);
