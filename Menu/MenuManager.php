@@ -39,7 +39,6 @@ class MenuManager
         if (count($userNetworks) >= 1) {
             $perimeters = new BusinessMenuItem();
             $perimeters->setName($translator->trans('menu.networks'));
-            $perimeters->setRoute('canal_tp_mtt_network_list');
             $currentExternalNetworkId = ($currentExternalNetworkId == null) ? $userNetworks->first()->getExternalNetworkId() : $currentExternalNetworkId;
             foreach ($userNetworks as $userNetwork) {
                 $explodedId = explode(':', $userNetwork->getExternalNetworkId());

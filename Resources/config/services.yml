@@ -20,9 +20,9 @@ services:
 
     sam.business_perimeter_manager.mtt:
         class: "%sam.business_perimeter_manager.mtt.class%"
-        arguments: ['@canal_tp_mtt.network_manager']
+        arguments: ['@canal_tp_mtt.perimeter_manager']
         public: false
-        
+
     sam.menu_manager.mtt:
         class: %sam.menu_manager.mtt.class%
         arguments: ['@canal_tp_mtt.user', @service_container]

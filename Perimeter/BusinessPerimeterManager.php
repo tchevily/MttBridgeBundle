@@ -2,19 +2,19 @@
 
 namespace CanalTP\MttBridgeBundle\Perimeter;
 
-use CanalTP\MttBundle\Services\NetworkManager;
+use FOS\UserBundle\Model\UserInterface;
+use CanalTP\MttBundle\Services\PerimeterManager;
 use CanalTP\SamEcoreApplicationManagerBundle\Perimeter\AbstractBusinessPerimeterManager;
 use CanalTP\SamEcoreApplicationManagerBundle\Perimeter\BusinessPerimeterInterface;
 use CanalTP\SamEcoreApplicationManagerBundle\Perimeter\BusinessPerimeter;
-use FOS\UserBundle\Model\UserInterface;
 
 class BusinessPerimeterManager extends AbstractBusinessPerimeterManager
 {
     private $perimeters;
 
-    public function __construct(NetworkManager $networkManager)
+    public function __construct(PerimeterManager $perimeterManager)
     {
-        $this->networkManager = $networkManager;
+        $this->perimeterManager = $perimeterManager;
     }
 
     /**
@@ -25,7 +25,7 @@ class BusinessPerimeterManager extends AbstractBusinessPerimeterManager
      */
     public function addUserToPerimeter(UserInterface $user, BusinessPerimeterInterface $perimeter)
     {
-        $this->networkManager->addUserToNetwork($user->getId(), $perimeter->getId());
+        $this->perimeterManager->addUserToPerimeter($user->getId(), $perimeter->getId());
     }
 
     /**
@@ -38,8 +38,8 @@ class BusinessPerimeterManager extends AbstractBusinessPerimeterManager
     {
         if (null === $this->perimeters) {
             $perimeters = array();
-            foreach ($this->networkManager->findAll() as $network) {
-                $perimeter = new BusinessPerimeter($network->getExternalNetworkId());
+            foreach ($this->perimeterManager->findAll() as $network) {
+                $perimeter = new BusinessPerimeter($network->getExternalPerimeterId());
                 $perimeter->setId($network->getId());
                 $this->perimeters[] = $perimeter;
             }
@@ -55,7 +55,7 @@ class BusinessPerimeterManager extends AbstractBusinessPerimeterManager
      */
     public function deleteUserPerimeters(UserInterface $user)
     {
-        $this->networkManager->deleteUserNetworks($user);
+        $this->perimeterManager->deleteUserPerimeters($user);
     }
 
     /**
@@ -68,7 +68,7 @@ class BusinessPerimeterManager extends AbstractBusinessPerimeterManager
     public function getUserPerimeters(UserInterface $user)
     {
         $userPerimeters = array();
-        foreach ($this->networkManager->findUserNetworks($user) as $network) {
+        foreach ($this->perimeterManager->findUserPerimeters($user) as $network) {
             foreach ($this->getPerimeters() as $perimeter) {
                 if ($perimeter->getId() == $network['id'] && $perimeter->getName() == $network['external_id']) {
                     $userPerimeters[] = $perimeter;
