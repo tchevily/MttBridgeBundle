@@ -144,7 +144,7 @@ class MenuManager
             $menu[] = $layout;
         }
 
-        if ($this->container->get('security.context')->isGranted('BUSINESS_LIST_CUSTOMER')) {
+        if ($this->container->get('security.context')->isGranted('BUSINESS_MANAGE_CUSTOMER')) {
             $customer = new BusinessMenuItem();
             $customer->setName($translator->trans('menu.customer_manage'));
             $customer->setRoute('canal_tp_mtt_customer_list');
