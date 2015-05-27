@@ -4,7 +4,7 @@
     "description": "Mtt SAM bridge bundle",
     "keywords": ["sam", "mtt", "bridge"],
     "homepage": "https://github.com/CanalTP/MttBridgeBundle",
-    "license": "MIT",
+    "license": "AGPLv3",
     "authors": [
         {
             "name": "Akambi Fagbohoun",
