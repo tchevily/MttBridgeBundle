@@ -34,6 +34,7 @@ class MenuManager
         $currentExternalNetworkId = $this->requestStack->getCurrentRequest()->attributes->get('externalNetworkId');
         $currentSeasonId = $this->requestStack->getCurrentRequest()->attributes->get('seasonId');
         $translator = $this->container->get('translator');
+        $route = $this->requestStack->getCurrentRequest()->get('_route');
         $menu = array();
 
         if (count($userNetworks) >= 1) {
@@ -113,6 +114,8 @@ class MenuManager
             'externalNetworkId' => $currentNetwork
         ));
 
+        $edit->setRoutePatternForHighlight(array('/.*_stop_point_.*/', '/.*_calendar_.*/', '/.*_timetable_.*/'));
+
         $menu[] = $edit;
 
         if ($this->container->get('security.context')->isGranted(array('BUSINESS_LIST_AREA', 'BUSINESS_MANAGE_AREA'))) {
@@ -122,6 +125,8 @@ class MenuManager
             $area->setParameters(array(
                 'externalNetworkId' => $currentNetwork
             ));
+
+            $area->setRoutePatternForHighlight(array('/.*_area_.*/'));
 
             $menu[] = $area;
         }
@@ -134,16 +139,20 @@ class MenuManager
                 'externalNetworkId' => $currentNetwork
             ));
 
+            $layout->setRoutePatternForHighlight(array('/.*_layout_config_.*/'));
+
             $menu[] = $layout;
         }
 
-        if ($this->container->get('security.context')->isGranted('BUSINESS_LIST_CUSTOMER')) {
+        if ($this->container->get('security.context')->isGranted('BUSINESS_MANAGE_CUSTOMER')) {
             $customer = new BusinessMenuItem();
             $customer->setName($translator->trans('menu.customer_manage'));
             $customer->setRoute('canal_tp_mtt_customer_list');
             $customer->setParameters(array(
                 'externalNetworkId' => $currentNetwork
             ));
+
+            $customer->setRoutePatternForHighlight(array('/.*_customer_.*/'));
 
             $menu[] = $customer;
         }

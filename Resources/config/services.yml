@@ -75,6 +75,6 @@ services:
 
     mtt.service_monitoring.navitia:
         class: "%sam.service_monitoring.http.rest.class%"
-        arguments: [%navitia_url%, 'Navitia']
+        arguments: [%config.navitia.url%, 'Navitia']
         tags:
             - { name: service_monitoring, category: Tech }
