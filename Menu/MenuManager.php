@@ -131,32 +131,45 @@ class MenuManager
             $menu[] = $area;
         }
 
-        if ($this->container->get('security.context')->isGranted(array('BUSINESS_LIST_LAYOUT_CONFIG', 'BUSINESS_MANAGE_LAYOUT_CONFIG'))) {
+        if (
+            $securityContext->isGranted('BUSINESS_LIST_LAYOUT_CONFIG')
+            && $securityContext->isGranted('BUSINESS_MANAGE_LAYOUT_CONFIG')
+            && $securityContext->isGranted('BUSINESS_MANAGE_CUSTOMER')
+        ) {
+            $administration = new BusinessMenuItem();
+            $administration->setName($translator->trans('menu.administration'));
+
+            $modelAdministration = new BusinessMenuItem();
+            $modelAdministration->setName($translator->trans('menu.models_manage'));
+            $modelAdministration->setRoute('canal_tp_mtt_model_list');
+            $modelAdministration->setParameters(array(
+                'externalNetworkId' => $currentNetwork
+            ));
+            $modelAdministration->setRoutePatternForHighlight(array('/.*_model_.*/'));
+            $administration->addChild($modelAdministration);
+
+            $customer = new BusinessMenuItem();
+            $customer->setName($translator->trans('menu.assign_models_to_customers'));
+            $customer->setRoute('canal_tp_mtt_customer_list');
+            $customer->setParameters(array(
+                'externalNetworkId' => $currentNetwork
+            ));
+            $customer->setRoutePatternForHighlight(array('/.*_customer_.*/'));
+            $administration->addChild($customer);
+
             $layout = new BusinessMenuItem();
             $layout->setName($translator->trans('menu.layouts_manage'));
             $layout->setRoute('canal_tp_mtt_layout_config_list');
             $layout->setParameters(array(
                 'externalNetworkId' => $currentNetwork
             ));
-
             $layout->setRoutePatternForHighlight(array('/.*_layout_config_.*/'));
+            $administration->addChild($layout);
 
-            $menu[] = $layout;
+            $administration->setRoutePatternForHighlight(array('/.*_customer_.*/', '/.*_layout_config_.*/', '/.*_model_.*/'));
+
+            $menu[] = $administration;
         }
-
-        if ($this->container->get('security.context')->isGranted('BUSINESS_MANAGE_CUSTOMER')) {
-            $customer = new BusinessMenuItem();
-            $customer->setName($translator->trans('menu.customer_manage'));
-            $customer->setRoute('canal_tp_mtt_customer_list');
-            $customer->setParameters(array(
-                'externalNetworkId' => $currentNetwork
-            ));
-
-            $customer->setRoutePatternForHighlight(array('/.*_customer_.*/'));
-
-            $menu[] = $customer;
-        }
-
 
         return $menu;
     }
