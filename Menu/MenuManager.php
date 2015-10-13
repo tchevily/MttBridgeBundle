@@ -107,16 +107,41 @@ class MenuManager
             $menu[] = $seasons;
         }
 
-        $edit = new BusinessMenuItem();
-        $edit->setName($translator->trans('menu.edit_timetables'));
-        $edit->setRoute('canal_tp_mtt_stop_point_list_defaults');
-        $edit->setParameters(array(
-            'externalNetworkId' => $currentNetwork
-        ));
+        // Timetables menu
+        if ($securityContext->isGranted(
+            array(
+                'BUSINESS_MANAGE_STOP_TIMETABLE',
+                'BUSINESS_MANAGE_LINE_TIMETABLE'
+            )
+        )) {
+            $editTimetable = new BusinessMenuItem();
+            $editTimetable->setName($translator->trans('menu.edit_timetables'));
+            $editTimetable->setRoutePatternForHighlight(array('/.*_stop_point_.*/', '/.*_calendar_.*/', '/.*_timetable_.*/'));
 
-        $edit->setRoutePatternForHighlight(array('/.*_stop_point_.*/', '/.*_calendar_.*/', '/.*_timetable_.*/'));
+            if ($securityContext->isGranted('BUSINESS_MANAGE_STOP_TIMETABLE'))
+            {
+                $stopTimetable = new BusinessMenuItem();
+                $stopTimetable->setName($translator->trans('menu.stop_timetable.list'));
+                $stopTimetable->setRoute('canal_tp_mtt_stop_point_list_defaults');
+                $stopTimetable->setParameters(array(
+                    'externalNetworkId' => $currentNetwork
+                ));
+                $editTimetable->addChild($stopTimetable);
+            }
 
-        $menu[] = $edit;
+            if ($securityContext->isGranted('BUSINESS_MANAGE_LINE_TIMETABLE'))
+            {
+                $lineTimetable = new BusinessMenuItem();
+                $lineTimetable->setName($translator->trans('menu.line_timetable.list'));
+                 $lineTimetable->setRoute('canal_tp_mtt_line_timetable_list_defaults');
+                $lineTimetable->setParameters(array(
+                    'externalNetworkId' => $currentNetwork
+                ));
+                $editTimetable->addChild($lineTimetable);
+            }
+
+            $menu[] = $editTimetable;
+        }
 
         if ($this->container->get('security.context')->isGranted(array('BUSINESS_LIST_AREA', 'BUSINESS_MANAGE_AREA'))) {
             $area = new BusinessMenuItem();
