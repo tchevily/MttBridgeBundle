@@ -55,7 +55,7 @@ class BusinessPerimeterManager extends AbstractBusinessPerimeterManager
      */
     public function deleteUserPerimeters(UserInterface $user)
     {
-        $this->perimeterManager->deleteUserPerimeters($user);
+        // @todo Implement the functionality
     }
 
     /**
