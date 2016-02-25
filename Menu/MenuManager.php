@@ -118,7 +118,7 @@ class MenuManager
 
         $menu[] = $edit;
 
-        if ($this->container->get('security.context')->isGranted(array('BUSINESS_LIST_AREA', 'BUSINESS_MANAGE_AREA'))) {
+        if ($securityContext->isGranted(array('BUSINESS_LIST_AREA', 'BUSINESS_MANAGE_AREA'))) {
             $area = new BusinessMenuItem();
             $area->setName($translator->trans('menu.area_manage'));
             $area->setRoute('canal_tp_mtt_area_list');
@@ -131,10 +131,21 @@ class MenuManager
             $menu[] = $area;
         }
 
+        if ($securityContext->isGranted(array('BUSINESS_MANAGE_LAYOUT_CONFIG'))) {
+            $layout = new BusinessMenuItem();
+            $layout->setName($translator->trans('menu.layouts_manage'));
+            $layout->setRoute('canal_tp_mtt_layout_config_list');
+            $layout->setParameters(array(
+                'externalNetworkId' => $currentNetwork
+            ));
+            $layout->setRoutePatternForHighlight(array('/.*_layout_config_.*/'));
+            $menu[] = $layout;
+        }
+
+        // Admin Menu
         if (
-            $securityContext->isGranted('BUSINESS_LIST_LAYOUT_CONFIG')
-            && $securityContext->isGranted('BUSINESS_MANAGE_LAYOUT_CONFIG')
-            && $securityContext->isGranted('BUSINESS_MANAGE_CUSTOMER')
+            $securityContext->isGranted('BUSINESS_MANAGE_LAYOUT_MODEL')
+            && $securityContext->isGranted('BUSINESS_ASSIGN_MODEL')
         ) {
             $administration = new BusinessMenuItem();
             $administration->setName($translator->trans('menu.administration'));
@@ -157,16 +168,7 @@ class MenuManager
             $customer->setRoutePatternForHighlight(array('/.*_customer_.*/'));
             $administration->addChild($customer);
 
-            $layout = new BusinessMenuItem();
-            $layout->setName($translator->trans('menu.layouts_manage'));
-            $layout->setRoute('canal_tp_mtt_layout_config_list');
-            $layout->setParameters(array(
-                'externalNetworkId' => $currentNetwork
-            ));
-            $layout->setRoutePatternForHighlight(array('/.*_layout_config_.*/'));
-            $administration->addChild($layout);
-
-            $administration->setRoutePatternForHighlight(array('/.*_customer_.*/', '/.*_layout_config_.*/', '/.*_model_.*/'));
+            $administration->setRoutePatternForHighlight(array('/.*_customer_.*/', '/.*_model_.*/'));
 
             $menu[] = $administration;
         }
