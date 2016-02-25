@@ -21,7 +21,8 @@ class MenuManager
     public function __construct(
         UserManager $userManager,
         Container $container
-    ) {
+    )
+    {
         $this->userManager = $userManager;
         $this->container = $container;
         $this->requestStack = $container->get('request_stack');
