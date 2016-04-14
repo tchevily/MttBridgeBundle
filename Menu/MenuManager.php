@@ -32,6 +32,7 @@ class MenuManager
     {
         $userManager = $this->userManager;
         $userNetworks = $userManager->getNetworks();
+
         $currentExternalNetworkId = $this->requestStack->getCurrentRequest()->attributes->get('externalNetworkId');
         $currentSeasonId = $this->requestStack->getCurrentRequest()->attributes->get('seasonId');
         $translator = $this->container->get('translator');
@@ -45,7 +46,8 @@ class MenuManager
             foreach ($userNetworks as $userNetwork) {
                 $explodedId = explode(':', $userNetwork->getExternalNetworkId());
                 $perimeter = new BusinessMenuItem();
-                $perimeter->setName($explodedId[1]);
+                $perimeterName = sprintf('%s%s', $explodedId[1], isset($explodedId[2]) ? ':'.$explodedId[2] : '');
+                $perimeter->setName($perimeterName);
                 $perimeter->setRoute('canal_tp_mtt_homepage');
                 $perimeter->setParameters(array('externalNetworkId' => $userNetwork->getExternalNetworkId()));
                 if ($currentExternalNetworkId == $userNetwork->getExternalNetworkId()) {
@@ -173,7 +175,7 @@ class MenuManager
 
             $menu[] = $administration;
         }
-
+        
         return $menu;
     }
 }
