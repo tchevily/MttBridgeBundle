@@ -21,8 +21,7 @@ class MenuManager
     public function __construct(
         UserManager $userManager,
         Container $container
-    )
-    {
+    ) {
         $this->userManager = $userManager;
         $this->container = $container;
         $this->requestStack = $container->get('request_stack');
@@ -110,6 +109,12 @@ class MenuManager
             $menu[] = $seasons;
         }
 
+        $calendars = new BusinessMenuItem();
+        $calendars->setName($translator->trans('menu.calendar_list'));
+        $calendars->setRoute('canal_tp_mtt_calendar_list');
+        $calendars->setRoutePatternForHighlight(['/.*_calendars.*/', ]);
+        $menu[] = $calendars;
+
         $edit = new BusinessMenuItem();
         $edit->setName($translator->trans('menu.edit_timetables'));
         $edit->setRoute('canal_tp_mtt_stop_point_list_defaults');
@@ -117,7 +122,7 @@ class MenuManager
             'externalNetworkId' => $currentNetwork
         ));
 
-        $edit->setRoutePatternForHighlight(array('/.*_stop_point_.*/', '/.*_calendar_.*/', '/.*_timetable_.*/'));
+        $edit->setRoutePatternForHighlight(array('/.*_stop_point_.*/', '/.*_calendar\/_.*/', '/.*_timetable_.*/'));
 
         $menu[] = $edit;
 
@@ -175,7 +180,7 @@ class MenuManager
 
             $menu[] = $administration;
         }
-        
+
         return $menu;
     }
 }

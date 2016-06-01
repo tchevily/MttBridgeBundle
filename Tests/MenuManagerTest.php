@@ -52,7 +52,7 @@ class MenuManagerTest extends \PHPUnit_Framework_TestCase
         $menu = $menuManager->getMenu();
 
         $this->assertInternalType('array', $menu, 'It should return a menu as an array.');
-        $menuItemsCount = 4;
+        $menuItemsCount = 5;
         $this->assertCount(
             $menuItemsCount,
             $menu,
@@ -63,7 +63,7 @@ class MenuManagerTest extends \PHPUnit_Framework_TestCase
         );
 
         $menuItemClass = 'CanalTP\MttBridgeBundle\Menu\BusinessMenuItem';
-        foreach (range(0, 3) as $menuIndex) {
+        foreach (range(0, 4) as $menuIndex) {
             $this->assertInstanceOf(
                 $menuItemClass,
                 $menu[$menuIndex],
@@ -76,6 +76,8 @@ class MenuManagerTest extends \PHPUnit_Framework_TestCase
         }
 
         $menuLabelsAssertions = [
+            'menu.calendar_list' =>
+                'The default menu item should be a label inviting to list calendars.',
             'menu.edit_timetables' =>
                 'The default menu item should be a label inviting to edit timetables.',
             'menu.area_manage' =>
