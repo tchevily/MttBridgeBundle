@@ -111,8 +111,8 @@ class MenuManager
 
         $calendars = new BusinessMenuItem();
         $calendars->setName($translator->trans('menu.calendar_list'));
-        $calendars->setRoute('canal_tp_mtt_calendar_list');
-        $calendars->setRoutePatternForHighlight(['/.*_calendars.*/', ]);
+        $calendars->setRoute('canal_tp_mtt_calendars_list');
+        $calendars->setRoutePatternForHighlight(['/.*_calendars_.*/', ]);
         $menu[] = $calendars;
 
         $edit = new BusinessMenuItem();
@@ -122,7 +122,7 @@ class MenuManager
             'externalNetworkId' => $currentNetwork
         ));
 
-        $edit->setRoutePatternForHighlight(array('/.*_stop_point_.*/', '/.*_calendar\/_.*/', '/.*_timetable_.*/'));
+        $edit->setRoutePatternForHighlight(array('/.*_stop_point_.*/', '/.*_calendar_.*/', '/.*_timetable_.*/'));
 
         $menu[] = $edit;
 
